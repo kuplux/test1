@@ -1,0 +1,65 @@
+my_decisions_category = {
+    icon = generic_decision_category # Ikona kategorie rozhodnutí
+    allowed = {
+        has_war = no # Zobrazí se, i když nejsi ve válce (pro případ wargoal)
+        tag = SOV # Nastav pro konkrétní zemi (např. SOV pro Sovětský svaz)
+    }
+}
+
+my_country_decisions = {
+    category = my_decisions_category
+    available = {
+        tag = SOV # Rozhodnutí je dostupné pouze pro Sovětský svaz
+    }
+    visible = {
+        tag = SOV # Rozhodnutí je viditelné pouze pro Sovětský svaz
+    }
+    remove_if_invalid = yes
+
+    # 1. Rozhodnutí pro wargoal (vyhlášení války)
+    decisions = {
+        my_wargoal_decision = {
+            icon = generic_focus_war_propaganda # Ikona rozhodnutí pro wargoal
+            cost = 50 # Cena v politické moci pro wargoal
+            available = {
+                has_war = no # Může být přijato, pouze pokud nejsi ve válce
+                political_power = 50 # Požadovaná politická moc
+                date > 2020.1.1 # Lze použít až od roku 2022
+            }
+            visible = {
+                tag = SOV # Rozhodnutí vidí pouze Sovětský svaz
+            }
+            complete_effect = {
+                add_wargoal = {
+                    target = UKR # Zkratka cílového státu (nahraď příslušným TAGem)
+                    type = annex_everything # Typ wargoalu (můžeš změnit typ)
+                }
+            }
+            days_remove = 30000 # Rozhodnutí se odstraní po 30000 dnech, pokud není použito
+            days_mission_timeout = 30 # Hráč má 30 dní na jeho provedení
+        }
+
+        # 2. Rozhodnutí pro whitepeace (bílý mír)
+        whitepeace_decision = {
+            icon = generic_focus_peace # Ikona rozhodnutí pro bílý mír
+            cost = 100 # Cena v politické moci pro uzavření bílého míru
+            available = {
+                has_war = yes # Dostupné pouze během války
+                any_enemy_country = {
+                    war_relation_duration > 1095 # Válka trvá více než 3 roky (1095 dní)
+                }
+                political_power = 100 # Požadovaná politická moc
+            }
+            visible = {
+                has_war = yes # Rozhodnutí viditelné pouze během války
+            }
+            complete_effect = {
+                white_peace = {
+                    target = TAG_OF_TARGET_COUNTRY # Zkratka cílového státu (nahraď příslušným TAGem)
+                }
+            }
+            days_remove = 30000 # Rozhodnutí se odstraní po 30000 dnech
+            days_mission_timeout = 30 # Hráč má 30 dní na jeho provedení
+        }
+    }
+}

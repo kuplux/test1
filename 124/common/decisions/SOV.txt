@@ -1,0 +1,36 @@
+SOV = {
+    category = my_decisions_category
+    available = {
+        has_war = no
+        political_power = 50 # Požadovaná politická moc
+        date > 2020.1.1 # Rozhodnutí je dostupné až od roku 2022
+        tag = SOV # Rozhodnutí je dostupné pouze pro tag SOV
+    }
+    visible = {
+        tag = SOV # Rozhodnutí vidí pouze SOV
+    }
+    remove_if_invalid = yes
+
+    decisions = {
+        my_wargoal_decision = {
+            icon = generic_focus_war_propaganda # Ikona rozhodnutí
+            cost = 50 # Cena v politické moci
+            available = {
+                has_war = no
+                date > 2020.1.1 # Rozhodnutí je dostupné až od roku 2022
+            }
+            visible = {
+                has_war = no
+                tag = SOV # Rozhodnutí vidí pouze SOV
+            }
+            complete_effect = {
+                add_wargoal = {
+                    target = TAG_OF_TARGET_COUNTRY # Zkratka cílového státu
+                    type = annex_everything # Typ wargoalu
+                }
+            }
+            days_remove = 30000 # Jak dlouho bude rozhodnutí dostupné po vytvoření
+            days_mission_timeout = 30 # Jak dlouho má hráč na splnění rozhodnutí
+        }
+    }
+}

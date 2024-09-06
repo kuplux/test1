@@ -1,0 +1,30 @@
+army_decisions = {
+	
+	expand_the_army_officer_corps = {
+		
+		visible = {
+			always = yes
+		}
+		
+		available = {
+			has_war_support > 0.2
+		}
+		
+		icon = armed_forces_officers
+		
+		cost = 50
+		
+		days_re_enable = 365
+		
+		complete_effect = {
+			army_experience = 25
+			custom_effect_tooltip = NVX_decision_returns_days_365
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+		
+	}
+	
+}

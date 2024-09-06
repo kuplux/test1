@@ -1,0 +1,48 @@
+my_whitepeace_decision_category = {
+    icon = generic_decision_category # Ikona kategorie rozhodnutí
+    allowed = {
+        has_war = yes # Rozhodnutí se objeví pouze ve válce
+    }
+}
+
+my_country_decisions = {
+    category = my_whitepeace_decision_category
+    available = {
+        has_war = yes
+        any_enemy_country = { # Podmínka, že je stát ve válce s jiným státem
+            is_in_faction = no # Nepřítel nesmí být ve frakci
+            at_war_with = {
+                tag = ROOT # Nepřítel musí být ve válce s tebou
+            }
+            war_relation_duration > 1095 # Trvání války je více než 3 roky (1095 dní)
+        }
+        political_power = 100 # Požadovaná politická moc pro vyvolání rozhodnutí
+    }
+    visible = {
+        has_war = yes # Rozhodnutí se zobrazuje jen během války
+    }
+    remove_if_invalid = yes
+
+    decisions = {
+        whitepeace_decision = {
+            icon = generic_focus_peace # Ikona rozhodnutí
+            cost = 100 # Cena v politické moci
+            available = {
+                has_war = yes
+                any_enemy_country = { # Kontrola délky války a situace
+                    war_relation_duration > 1095 # Válka trvá více než 3 roky
+                }
+            }
+            visible = {
+                has_war = yes # Rozhodnutí viditelné pouze během války
+            }
+            complete_effect = {
+                white_peace = {
+                    target = TAG_OF_TARGET_COUNTRY # Zkratka cílového státu (nebo všech nepřátel)
+                }
+            }
+            days_remove = 30000 # Rozhodnutí se odstraní po 30 dnech
+            days_mission_timeout = 30 # Hráč má 30 dní na provedení rozhodnutí
+        }
+    }
+}
